@@ -72,13 +72,16 @@ namespace Acme.BookStore.Web
             //{
             //    options.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
             //}).InitializeTagHelper<FormTagHelper>((helper, context) => helper.Antiforgery = false);
-
-            Configure<AbpAntiForgeryOptions>(options =>
+            context.Services.AddRazorPages(options =>
             {
-                //options.TokenCookie.Expiration = TimeSpan.FromDays(365);
-                //options.AutoValidate = false;
-                options.AutoValidateIgnoredHttpMethods.Add("POST");
+                options.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
             });
+            //Configure<AbpAntiForgeryOptions>(options =>
+            //{
+            //    //options.TokenCookie.Expiration = TimeSpan.FromDays(365);
+            //    //options.AutoValidate = false;
+            //    options.AutoValidateIgnoredHttpMethods.Add("POST");
+            //});
 
 
             Configure<AbpBundlingOptions>(options =>
@@ -111,7 +114,10 @@ namespace Acme.BookStore.Web
             });
             Configure<AbpAspNetCoreMvcOptions>(options =>
             {
-                options.ConventionalControllers.Create(typeof(BookStoreApplicationModule).Assembly);
+                options.ConventionalControllers.Create(typeof(BookStoreApplicationModule).Assembly, options =>
+                {
+                    
+                });
             });
 
 

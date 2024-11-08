@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Acme.BookStore.Web.Pages.Books
 {
-    [IgnoreAntiforgeryToken]
+    [IgnoreAntiforgeryToken(Order = 1001)]
     public class CreateModalModel : BookStorePageModel
     {
         public CreateModalModel(IBookAppService bookAppService)
